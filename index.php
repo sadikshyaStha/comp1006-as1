@@ -2,7 +2,8 @@
 <?php 
     $title = 'Home';
     include('shared/header.php'); 
-    ?>
-    <h2>Welcome to Tracking of Household Daily chores</h2>
+    ?><!--Home page title-->
+    <h2>Welcome to Tracking of Household Daily Chores</h2>
+</main>
 </body>
 </html>
