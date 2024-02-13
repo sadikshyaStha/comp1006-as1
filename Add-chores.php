@@ -18,7 +18,7 @@ include('shared/header.php'); ?>
     </fieldset>
     <fieldset>
         <label for="EndTime">End Time: *</label>
-        <input name="EndTime" id="End Time" required />
+        <input name="EndTime" id="EndTime" required />
     </fieldset>
     <button>Submit</button>
 </form>
