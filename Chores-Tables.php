@@ -12,7 +12,6 @@ $cmd->execute();
 //fetching the results
 $chores = $cmd->fetchAll();
 
-
 echo '<h1>Chores Tables</h1>';
 //Creating a table to display data of chores done 
 echo '<table><thead><th>Type</th><th>DoneBy</th><th>StartTime</th><th>EndTime</th></thead>';

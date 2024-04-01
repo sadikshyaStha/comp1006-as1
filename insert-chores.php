@@ -11,23 +11,22 @@ $ok = true;
 
 //Validating the form inputs
 if (empty($Type)) {
-    echo 'Type is mandatory<br />';
+    echo 'Type is mandatory<br/>';
     $ok = false;
 }
 if (empty($DoneBy)) {
-    echo 'DoneBy is mandatory<br />';
+    echo 'DoneBy is mandatory<br/>';
     $ok = false;
 }
-
 if (empty($StartTime)) {
-    echo 'StartTime is mandatory<br />';
+    echo 'StartTime is mandatory<br/>';
     $ok = false;
 }
 else {
     //Giving statements if the starttime is numeric or not
     if (is_numeric($StartTime)) {
         if ($StartTime < 1) {
-            echo 'StartTime must be numeric 1';
+            echo 'StartTime must be numeric ';
             $ok = false;
         }
     }
@@ -40,7 +39,8 @@ if (empty($EndTime)) {
     echo 'EndTime is mandatory<br />';
     $ok = false;
 }
-// when the inputs are valid it is used to save the data to the database
+
+// when the inputs are valid,it is used to save the data to the database
 if ($ok == true) {
 
     include('shared/db.php');
@@ -52,7 +52,6 @@ if ($ok == true) {
     $cmd->bindParam(':DoneBy', $DoneBy, PDO::PARAM_STR);
     $cmd->bindParam(':StartTime', $StartTime, PDO::PARAM_INT);
     $cmd->bindParam(':EndTime', $EndTime, PDO::PARAM_INT);
-   
     $cmd->execute();
   
     //ending the databse connection

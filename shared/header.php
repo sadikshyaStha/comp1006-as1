@@ -6,10 +6,10 @@
     <title>Household Chores</title>
 </head>
 <body>
-    <!--topic-->
+    <!--the topic-->
     <h1>Household chores</h1>
     <ul>
-        <li><!--Link to go to home page-->
+        <li><!--Link to go to the home page-->
             <a href="index.php">Home</a>
         </li>
         <li><!--Link to go to the Add chores page-->

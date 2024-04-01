@@ -18,7 +18,7 @@ include('shared/header.php'); ?>
     <!--input box for endtime form-->
     <fieldset>
         <label for="EndTime">End Time: *</label>
-        <input name="EndTime" id="End Time" required />
+        <input name="EndTime" id="EndTime" required />
     </fieldset>
     <fieldset>
         <!--Dropdown box to cboose who will do the chores-->
