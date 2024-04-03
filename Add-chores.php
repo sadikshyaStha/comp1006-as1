@@ -9,12 +9,10 @@ include('shared/header.php'); ?>
         <label for="Type">Type: *</label>
         <input type="text" name="Type" placeholder="Type" required />
     </fieldset>
-    <!--input box for starttime form-->
     <fieldset>
         <label for="StartTime">Start Time: *</label>
         <input name="StartTime" id="StartTime" required />
     </fieldset>
-    <!--input box for endtime form-->
     <fieldset>
         <label for="EndTime">End Time: *</label>
         <input name="EndTime" id="EndTime" required />
@@ -32,7 +30,6 @@ include('shared/header.php'); ?>
               $cmd = $db->prepare($sql);
                $cmd->execute();
               $DoneBy = $cmd->fetchAll();
-               // loop through list of services, adding each one to dropdown 1 at a time
               foreach ($DoneBy as $DoneBy) {
                 echo '<option>' . $DoneBy['name'] . '</option>';
             }
@@ -40,7 +37,6 @@ include('shared/header.php'); ?>
             $db = null;
             }
             catch (Exception $err) {
-                //Example Email Send: mail('me@domain.com', 'PHP TV Error', $err);
                 header('location:error.php');
                 exit();
             }

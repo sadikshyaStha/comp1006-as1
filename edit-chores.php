@@ -10,7 +10,11 @@ $DoneBy = null;
 $StartTime = null;
 $EndTime = null;
 
+
 if (is_numeric($ChoresId)) {
+
+
+   
     try {
         // connect
         include('shared/db.php');
@@ -19,51 +23,56 @@ if (is_numeric($ChoresId)) {
         $cmd = $db->prepare($sql);
         $cmd->bindParam(':ChoresID', $ChoresId, PDO::PARAM_INT);
         $cmd->execute();
-        $chore = $cmd->fetch(); 
+         $chore = $cmd->fetch(); 
 
-        $Type = $chore['Type'];
+         $Type = $chore['Type'];
         $DoneBy = $chore['DoneBy'];
         $StartTime = $chore['StartTime'];
         $EndTime = $chore['EndTime'];
         $photo = $chore['photo'];
     }
-    catch (Exception $err) {
-        header('location:error.php');
-        exit();
+  catch (Exception $err) {
+      header('location:error.php');
+      exit();
     }
 }
+
+
 ?>
 
 <h2>Edit Chores Details</h2>
 <form method="post" action="update-Chores.php" enctype="multipart/form-data">
     <fieldset>
         <label for="Type">Type: *</label>
-        <input type="text" id="Type" name="Type" required value="<?php echo $Type; ?>" />
+        <input Type="Type" id="Type" required value="<?php echo $Type; ?>"
+    />
+    </select>
     </fieldset>
     <input type="hidden" name="ChoresID" id="ChoresID" value="<?php echo $ChoresId; ?>" />
     <fieldset>
-        <label for="StartTime">StartTime: *</label>
-        <input type="text" name="StartTime" id="StartTime" required value="<?php echo $StartTime; ?>"/>
+    <label for="$StartTime">StartTime: *</label>
+        <input name="StartTime" id="StartTime" required value="<?php echo $StartTime; ?>"/>
     </fieldset>
     <fieldset>
-        <label for="EndTime">EndTime: *</label>
-        <input type="text" name="EndTime" id="EndTime" required value="<?php echo $EndTime; ?>" />
+    <label for="EndTime">EndTime: *</label>
+        <input name="EndTime" id="EndTime" required value="<?php echo $EndTime; ?>" />
     </fieldset>
     <fieldset>
         <label for="DoneBy">DoneBy: *</label>
-        <select name="DoneBy" id="DoneBy" required>
+        <select name="DoneBy" id="DoneBy" required >
             <?php
             // set up & run query, store data results
             $sql = "SELECT * FROM DoneBy ORDER BY name";
             $cmd = $db->prepare($sql);
             $cmd->execute();
-            $doneByOptions = $cmd->fetchAll();
+            $DoneBy = $cmd->fetchAll();
 
-            foreach ($doneByOptions as $option) {
-                if ($option['name'] == $DoneBy) {
-                    echo '<option selected>' . $option['name'] . '</option>';
-                } else {
-                    echo '<option>' . $option['name'] . '</option>';
+            foreach ($DoneBy as $DoneBy) {
+                if ($DoneBy['name'] == $DoneBy) {
+                    echo '<option selected>' . $DoneBy['name'] . '</option>';
+                }
+                else {
+                     echo '<option>' . $DoneBy['name'] . '</option>';
                 }    
             }
 
@@ -78,7 +87,7 @@ if (is_numeric($ChoresId)) {
         <input type="file" id="photo" name="photo" accept="image/*" />
         <input type="hidden" id="currentPhoto" name="currentPhoto" value="<?php echo $photo; ?>" />
         <?php
-        if (!empty($photo)) {
+        if ($photo != null) {
             echo '<img src="img/uploads/' . $photo . '" alt="Chores Photo" />';
         }
         ?>

@@ -21,6 +21,6 @@ require 'shared/header.php';
     </fieldset>
     <button class="offset-button">Login</button>
   </form>
-</main>
+</main>s
 </body>
 </html>
