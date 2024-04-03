@@ -1,4 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo $title; ?></title>
+    <link rel="stylesheet" href="./CSS/site.css" />
+</head>
+
 <?php
+
 include('shared/auth.php');
 $title = 'Show Chores';
 include('shared/header.php');
