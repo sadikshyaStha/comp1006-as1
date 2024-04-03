@@ -3,4 +3,5 @@ I have added edit and delete page which can be only accesed if the user can regi
 i have tried to add the image but i couldnot do it somehow.
 
 # Link to my live AWS server 
-https://lamp.computerstudi.es/~Sadikshya200563573/comp1006-as1/
+https://lamp.computerstudi.es/~Sadikshya200563573/
+s
