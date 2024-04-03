@@ -1,14 +1,13 @@
 <?php 
-$title = 'Add chores';
+include('shared/auth.php');
+$title = 'Add Show';
 include('shared/header.php'); ?>
-<!--displayiing the topic-->
-<h2>Add new chores</h2>
-<!--A form for adding new chores-->
-<form method="post" action="insert-chores.php">
-     <!--input box for type form-->
+
+<h2>Add New Chores</h2>
+<form method="post" action="insert-chores.php" enctype="multipart/form-data">
 <fieldset>
         <label for="Type">Type: *</label>
-        <input name="Type" id="Type" required />
+        <input type="text" name="Type" placeholder="Type" required />
     </fieldset>
     <!--input box for starttime form-->
     <fieldset>
@@ -21,28 +20,39 @@ include('shared/header.php'); ?>
         <input name="EndTime" id="EndTime" required />
     </fieldset>
     <fieldset>
-        <!--Dropdown box to cboose who will do the chores-->
-        <label for="DoneBy">Done By: *</label>
+    <label for="DoneBy">Done By: *</label>
         <select name="DoneBy" id="DoneBy" required>
             <?php
-            //Connecting to the database
-            include('shared/db.php');
-            //Query to select the name from DoneBy
-            $sql = "SELECT * FROM DoneBy ORDER BY name";
-            $cmd = $db->prepare($sql);
-            $cmd->execute();
-            $DoneBy = $cmd->fetchAll();
-          //creating a loop through each name and creating an option to have a dropdown menu
-            foreach ($DoneBy as $DoneBy) {
+            // connect
+            try {
+                // connect
+                include('shared/db.php');
+            // set up & run query, store data results
+              $sql = "SELECT * FROM DoneBy ORDER BY name";
+              $cmd = $db->prepare($sql);
+               $cmd->execute();
+              $DoneBy = $cmd->fetchAll();
+               // loop through list of services, adding each one to dropdown 1 at a time
+              foreach ($DoneBy as $DoneBy) {
                 echo '<option>' . $DoneBy['name'] . '</option>';
             }
-           //closing the database connection
+              // disconnect
             $db = null;
+            }
+            catch (Exception $err) {
+                //Example Email Send: mail('me@domain.com', 'PHP TV Error', $err);
+                header('location:error.php');
+                exit();
+            }
             ?>
         </select>
     </fieldset>
-   <!--Submit button for the form-->
+    <fieldset>
+        <label for="photo">Photo:</label>
+        <input type="file" id="photo" name="photo" accept="image/*"  />
+    </fieldset>
     <button class="offset-button">Submit</button>
 </form>
+</main>
 </body>
 </html>

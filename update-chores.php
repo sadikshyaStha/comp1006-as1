@@ -1,9 +1,11 @@
 <?php
+include('shared/auth.php');
 $title = 'Saving Chores Updates...';
 include('shared/header.php');
 
+
 // capture form inputs into vars
-$choreId = $_POST['ChoresId'];  // id value from hidden input on form
+$ChoresId = $_POST['ChoresID'];  // id value from hidden input on form
 $Type = $_POST['Type'];
 $DoneBy = $_POST['DoneBy'];
 $StartTime = $_POST['StartTime'];
@@ -12,7 +14,6 @@ $ok = true;
 
 // input validation before save
 if (empty($Type)) {
-    echo 'Type is mandatory<br/>';
     $ok = false;
 }
 if (empty($DoneBy)) {
@@ -40,35 +41,72 @@ if (empty($EndTime)) {
     echo 'EndTime is mandatory<br />';
     $ok = false;
 }
+if ($_FILES['photo']['size'] > 0) { 
+    $photoName = $_FILES['photo']['name'];
+    $finalName = session_id() . '-' . $photoName;
+    //echo $finalName . '<br />';
 
-// when the inputs are valid,it is used to save the data to the database
+    // in php, file size is bytes (1 kb = 1024 bytes)
+    $size = $_FILES['photo']['size']; 
+    //echo $size . '<br />';
+
+    // temp location in server cache
+    $tmp_name = $_FILES['photo']['tmp_name'];
+    //echo $tmp_name . '<br />';
+
+    // file type
+    // $type = $_FILES['photo']['type']; // never use this - unsafe, only checks extension
+    $type = mime_content_type($tmp_name);
+    //echo $type . '<br />';
+
+    if ($type != 'image/jpeg' && $type != 'image/png') {
+        echo 'Photo must be a .jpg or .png';
+        exit();
+    }
+    else {
+        // save file to img/uploads
+        move_uploaded_file($tmp_name, 'img/uploads/' . $finalName);
+    }     
+}
+else {
+    $finalName = $_POST['currentPhoto'];
+}
+
 if ($ok == true) {
     // connect to db using the PDO (PHP Data Objects Library)
-    include('shared/db.php');
+    try {
+        // connect to db using the PDO (PHP Data Objects Library)
+        include('shared/db.php');
 
+       // set up SQL UPDATE command
+      $sql = "UPDATE ChoresID SET Type = :Type, DoneBy = :DoneBy, 
+        StartTime = :StartTime, EndTime = :EndTime WHERE photo = :photo ChoresID = :ChoresID";
+       
 
-    // set up SQL UPDATE command
-    $sql = "UPDATE Chores SET Type = :Type, DoneBy = :DoneBy, 
-        StartTime = :StartTime, EndTime = :EndTime WHERE ChoresId = :ChoresId";
+       // link db connection w/SQL command we want to run
+       $cmd = $db->prepare($sql);
 
-    // link db connection w/SQL command we want to run
-    $cmd = $db->prepare($sql);
+       // map each input to a column in the shows table
+       $cmd->bindParam(':Type', $name, PDO::PARAM_STR, 100);
+       $cmd->bindParam(':DoneBy', $DoneBy, PDO::PARAM_STR,100);
+       $cmd->bindParam(':StartTime', $StartTime, PDO::PARAM_INT);
+       $cmd->bindParam(':EndTime', $EndTime, PDO::PARAM_INT);
+       $cmd->bindParam(':ChoresID', $ChoresId, PDO::PARAM_INT);
+       $cmd->bindParam(':photo', $finalName, PDO::PARAM_STR, 100);
 
-    // map each input to a column in the shows table
-    $cmd->bindParam(':Type', $Type, PDO::PARAM_STR, 100);
-    $cmd->bindParam(':DoneBy', $DoneBy, PDO::PARAM_STR);
-    $cmd->bindParam(':StartTime', $StartTime, PDO::PARAM_INT);
-    $cmd->bindParam(':EndTime', $EndTime, PDO::PARAM_INT);
-    $cmd->bindParam(':ChoresId', $choreId, PDO::PARAM_INT);
+       // execute the update (which saves to the db)
+       $cmd->execute();
 
-    // execute the update (which saves to the db)
-    $cmd->execute();
+       // disconnect
+       $db = null;
 
-    // disconnect
-    $db = null;
-
-    // show msg to user
-    echo 'Chores Updated';
+        // show msg to user
+         echo 'Chores Updated';
+    }
+       catch (Exception $err) {
+         header('location:error.php');
+         exit();
+         }
 }
 ?>
 </main>
