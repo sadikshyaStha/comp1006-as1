@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $title; ?></title>
-    <link rel="stylesheet" href="./CSS/site.css" />
+    <link rel="stylesheet" href="./css/site.css" />
 </head>
 
 <?php
@@ -41,7 +41,7 @@ foreach ($schores as $chore) {
         <td>' . $chore['Type'] . '</td>
         <td>';
         if ($chore['photo'] != null) {
-            echo '<img src="img' . $chore['photo'] . '" class="thumbnail"  />';
+            echo '<img src="img/uploads/' . $chore['photo'] . '" class="thumbnail"  />';
         }
         echo '</td>
         <td>' . $chore['StartTime'] . '</td>
@@ -58,11 +58,6 @@ foreach ($schores as $chore) {
             </td>';
         }
         echo '</tr>';
-}
-
-// If $schores is empty, display a message
-if (empty($schores)) {
-    echo '<tr><td colspan="6">No chores found.</td></tr>';
 }
 
 // end list

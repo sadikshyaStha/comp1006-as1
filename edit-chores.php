@@ -44,7 +44,7 @@ if (is_numeric($ChoresId)) {
 <form method="post" action="update-Chores.php" enctype="multipart/form-data">
     <fieldset>
         <label for="Type">Type: *</label>
-        <input Type="Type" id="Type" required value="<?php echo $Type; ?>"
+        <input name="Type" id="Type" required value="<?php echo $Type; ?>"
     />
     </select>
     </fieldset>
