@@ -35,6 +35,13 @@ main {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(195, 167, 140, 0.1);
 }
+/* Hover effect for the main element */
+main:hover {
+    transform: scale(1.01); /* Scale up the element on hover */
+    transition: transform 0.3s ease; /* Add smooth transition for the scaling effect */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow on hover */
+}
+
 
 /* Form Styles */
 fieldset {
