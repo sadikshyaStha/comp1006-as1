@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $title; ?></title>
+    <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="./css/site.css" />
 </head>
 <?php 
@@ -31,7 +32,6 @@ include('shared/header.php'); ?>
             <?php
             // connect
             try {
-                // connect
                 include('shared/db.php');
             // set up & run query, store data results
               $sql = "SELECT * FROM DoneBy ORDER BY name";

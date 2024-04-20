@@ -1,18 +1,18 @@
 <?php
 include('shared/auth.php');
 // read the showId from the url parameter using $_GET   
-$ChoresID= $_GET['ChoresID'];
+$ChoresId= $_GET['ChoresId'];
 
-if (is_numeric($ChoresID)) {
+if (is_numeric($ChoresId)) {
     // connect to db
     include('shared/db.php');
     try {
         // connect to db
         include('shared/db.php');
     // prepare SQL DELETE
-         $sql = "DELETE FROM Chores WHERE ChoresID = :ChoresID";
+         $sql = "DELETE FROM Chores WHERE ChoresId = :ChoresId";
         $cmd = $db->prepare($sql);
-         $cmd->bindParam(':ChoresID', $ChoresID, PDO::PARAM_INT);
+         $cmd->bindParam(':ChoresId', $ChoresId, PDO::PARAM_INT);
 
     // execute the delete
          $cmd->execute();

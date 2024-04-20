@@ -34,12 +34,12 @@
             
             if (!empty($_SESSION['username'])) {
               echo '<li class="navbar-item">
-                <a class="navbar-link" href="Add-chores.php">Add chores</a>
+                <a class="navbar-link" href="Add-chores.php">Add Chores</a>
               </li>';
             }            
             ?>
             <li class="navbar-item">
-              <a class="navbar-link" href="Chores-Tables.php">All the Works</a>
+              <a class="navbar-link" href="Chores-Tables.php">All The Works</a>
             </li>
             <?php
             if (!empty($_SESSION['username'])) {
