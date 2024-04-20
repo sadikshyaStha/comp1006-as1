@@ -15,7 +15,7 @@ include('shared/header.php'); ?>
 <form method="post" action="insert-chores.php" enctype="multipart/form-data">
 <fieldset>
         <label for="Type">Type: *</label>
-        <input type="text" name="Type" placeholder="Type" required />
+        <input name="Type" placeholder="Type" required />
     </fieldset>
     <fieldset>
         <label for="StartTime">Start Time: *</label>

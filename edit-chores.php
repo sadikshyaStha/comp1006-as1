@@ -3,7 +3,7 @@ include('shared/auth.php');
 $title = 'Edit Chores';
 include('shared/header.php'); 
 
-$ChoresId = $_GET['ChoresID'];
+$ChoresId = $_GET['ChoresId'];
 
 $Type = null;
 $DoneBy = null;
@@ -19,17 +19,17 @@ if (is_numeric($ChoresId)) {
         // connect
         include('shared/db.php');
 
-        $sql = "SELECT * FROM Chores WHERE ChoresID = :ChoresID";
+        $sql = "SELECT * FROM Chores WHERE ChoresId = :ChoresId";
         $cmd = $db->prepare($sql);
-        $cmd->bindParam(':ChoresID', $ChoresId, PDO::PARAM_INT);
+        $cmd->bindParam(':ChoresId', $ChoresId, PDO::PARAM_INT);
         $cmd->execute();
-         $chore = $cmd->fetch(); 
+         $chores = $cmd->fetch(); 
 
-         $Type = $chore['Type'];
-        $DoneBy = $chore['DoneBy'];
-        $StartTime = $chore['StartTime'];
-        $EndTime = $chore['EndTime'];
-        $photo = $chore['photo'];
+         $Type = $chores['Type'];
+        $DoneBy = $chores['DoneBy'];
+        $StartTime = $chores['StartTime'];
+        $EndTime = $chores['EndTime'];
+        $photo = $chores['photo'];
     }
   catch (Exception $err) {
       header('location:error.php');
@@ -48,7 +48,7 @@ if (is_numeric($ChoresId)) {
     />
     </select>
     </fieldset>
-    <input type="hidden" name="ChoresID" id="ChoresID" value="<?php echo $ChoresId; ?>" />
+    <input type="hidden" name="ChoresId" id="ChoresId" value="<?php echo $ChoresId; ?>" />
     <fieldset>
     <label for="$StartTime">StartTime: *</label>
         <input name="StartTime" id="StartTime" required value="<?php echo $StartTime; ?>"/>
@@ -81,19 +81,22 @@ if (is_numeric($ChoresId)) {
             ?>
         </select>
     </fieldset>
-    <input type="hidden" name="ChoresID" id="ChoresID" value="<?php echo $ChoresId; ?>" />
+    <input type="hidden" name="ChoresId" id="ChoresId" value="<?php echo $ChoresId; ?>" />
     <fieldset>
-        <label for="photo">Photo:</label>
-        <input type="file" id="photo" name="photo" accept="image/*" />
-        <input type="hidden" id="currentPhoto" name="currentPhoto" value="<?php echo $photo; ?>" />
-        <?php
-        if ($photo != null) {
-            echo '<img src="img/uploads/' . $photo . '" alt="Chores Photo" />';
-        }
-        ?>
-    </fieldset>
+    <label for="photo">Photo:</label>
+    <input type="file" id="photo" name="photo" accept="image/*" />
+    <input type="hidden" id="currentPhoto" name="currentPhoto" value="<?php echo $photo; ?>" />
+    <?php
+    if ($photo != null) {
+        echo '<img src="img/uploads/' . $photo . '" alt="Chores Photo" />';
+    } else {
+        echo '<p>No photo available.</p>';
+    }
+    ?>
+</fieldset>
+
     <button class="offset-button">Submit</button>
 </form>
 </main>
 </body>
-</html>
+</html> 

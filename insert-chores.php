@@ -19,10 +19,10 @@ if ($_FILES['photo']['size'] > 0) {
     }
     else {
         // save file to img/uploads
-        move_uploaded_file($tmp_name, 'img' . $finalName);
+        move_uploaded_file($tmp_name, 'img/uploads/' . $finalName);
     }
 }
-// Checking if the form was submitted and fields are set
+
 $Type = $_POST['Type'];
 echo $Type;
 $DoneBy = $_POST['DoneBy'];
@@ -30,7 +30,6 @@ $StartTime = $_POST['StartTime'];
 $EndTime = $_POST['EndTime'];
 $ok = true;
 
-// Validating the form inputs
 if (empty($Type)) {
     echo 'Type is mandatory<br/>';
     $ok = false;
@@ -48,15 +47,12 @@ if (empty($EndTime)) {
     $ok = false;
 }
 
-// When the inputs are valid, save the data to the database
 if ($ok) {
     try {
         include('shared/db.php');
-        // Corrected SQL statement with a comma before :photo
         $sql = "INSERT INTO Chores (Type, DoneBy, StartTime, EndTime, photo) VALUES (:Type, :DoneBy, :StartTime, :EndTime, :photo)";
         
         $cmd = $db->prepare($sql);
-        // Corrected the variable bindings
         $cmd->bindParam(':Type', $Type, PDO::PARAM_STR);
         $cmd->bindParam(':DoneBy', $DoneBy, PDO::PARAM_STR);
         $cmd->bindParam(':StartTime', $StartTime, PDO::PARAM_STR);

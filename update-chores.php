@@ -5,7 +5,7 @@ include('shared/header.php');
 
 
 // capture form inputs into vars
-$ChoresId = $_POST['ChoresID'];  // id value from hidden input on form
+$ChoresId = $_POST['ChoresId'];  // id value from hidden input on form
 $Type = $_POST['Type'];
 $DoneBy = $_POST['DoneBy'];
 $StartTime = $_POST['StartTime'];
@@ -79,8 +79,8 @@ if ($ok == true) {
         include('shared/db.php');
 
        // set up SQL UPDATE command
-      $sql = "UPDATE ChoresID SET Type = :Type, DoneBy = :DoneBy, 
-        StartTime = :StartTime, EndTime = :EndTime WHERE photo = :photo ChoresID = :ChoresID";
+      $sql = "UPDATE ChoresId SET Type = :Type, DoneBy = :DoneBy, 
+        StartTime = :StartTime, EndTime = :EndTime WHERE photo = :photo ChoresId = :ChoresId";
        
 
        // link db connection w/SQL command we want to run
@@ -91,7 +91,7 @@ if ($ok == true) {
        $cmd->bindParam(':DoneBy', $DoneBy, PDO::PARAM_STR,100);
        $cmd->bindParam(':StartTime', $StartTime, PDO::PARAM_INT);
        $cmd->bindParam(':EndTime', $EndTime, PDO::PARAM_INT);
-       $cmd->bindParam(':ChoresID', $ChoresId, PDO::PARAM_INT);
+       $cmd->bindParam(':ChoresId', $ChoresId, PDO::PARAM_INT);
        $cmd->bindParam(':photo', $finalName, PDO::PARAM_STR, 100);
 
        // execute the update (which saves to the db)

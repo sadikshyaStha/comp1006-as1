@@ -7,9 +7,21 @@
 /* Body styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: whitesmoke;
+    color: #15388e;
 }
+
+p {
+    margin-bottom: 20px;
+    color:rgb(160, 163, 175);
+}
+
+form {
+    max-width: 600px; /* Adjust as needed */
+    background-color: whitesmoke;
+    color: #cfa92e;
+}
+
 
 /* Form container */
 main {
@@ -21,33 +33,53 @@ main {
     box-shadow: 0 0 10px rgba(195, 167, 140, 0.1);
 }
 
-/* Form fieldset styles */
+/* Form Styles */
 fieldset {
-    margin-bottom: 100px;
+    margin-bottom: 10px;
 }
 
-/* Form label styles */
+/* Styling for labels */
 label {
     display: block;
+    margin-bottom: 5px;
     font-weight: bold;
-    margin-bottom: 1px;
 }
 
-/* Form input styles */
+/* Styling for text input, email input, password input, and select dropdown */
 input[type="text"],
+input[type="email"],
+input[type="password"],
 select {
     width: 100%;
-    padding: 1px;
-    border: 10px solid #eeebeb;
+    height: 40px; /* Adjust height as needed */
+    padding: 8px;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 16px;
+    box-sizing: border-box;
 }
 
-/* Form file input styles */
-input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
+/* Styling for when inputs and select dropdowns are focused */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Styling for placeholder text in inputs and select dropdowns */
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+    color: #999;
+}
+
+/* Styling for submit button */
+input[type="submit"] {
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
 }
 
 /* Form button styles */
@@ -73,8 +105,12 @@ button:hover {
 
 #navbar {
     background-color: #36439c; 
-    color: #247a54; 
+    color: #CCA43B; 
     padding: 10px 0; 
+}
+nav ul li a:hover {
+    background-color: #7e7979;
+    color: #220d0d; /* Change to the desired hover color */
 }
 
 .navbar-container {
@@ -139,7 +175,7 @@ table {
 }
 
 thead {
-    background-color: #2e438b;
+    background-color: #e3e6ee;
 }
 
 th, td {
